@@ -1,15 +1,11 @@
-#[macro_use]
-extern crate rocket;
-extern crate passg;
-
 use passg::prelude::*;
 
-#[get("/")]
+#[rocket::get("/")]
 fn generate_password() -> String {
     Generator::default().generate()
 }
 
-#[launch]
+#[rocket::launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![generate_password])
+    rocket::build().mount("/", rocket::routes![generate_password])
 }
