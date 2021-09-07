@@ -11,5 +11,5 @@ fn generate_password() -> String {
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/passwd", routes![generate_password])
+    rocket::build().mount("/", routes![generate_password])
 }
