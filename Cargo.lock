@@ -402,8 +402,10 @@ dependencies = [
 name = "hrku_mytools"
 version = "0.1.0"
 dependencies = [
- "passg",
+ "passg-lib",
  "rocket",
+ "serde",
+ "thiserror",
 ]
 
 [[package]]
@@ -650,10 +652,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "passg"
-version = "0.2.0"
+name = "passg-lib"
+version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "05cc4f0e341c6a34ebe5f2fb98db76fa10443dc1586bd07495d5bfc4ea3736cc"
+checksum = "8ae273273b12a1cc4a354c7e470259c0185a834acfd4f360e0021d695b905f2f"
 dependencies = [
  "derive_builder",
  "rand",

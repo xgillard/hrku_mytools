@@ -4,5 +4,7 @@ name = "hrku_mytools"
 version = "0.1.0"
 
 [dependencies]
-passg = "0.2.0"
+passg-lib = "0.1.0"
 rocket = {version = "0.5.0-rc.1", git = "https://github.com/SergioBenitez/Rocket"}
+serde = "1.0.130"
+thiserror = "1.0.29"
