@@ -33,7 +33,7 @@ pub async fn remove(pool: &PgPool, id: i64) -> Result<(), error::Error> {
     Ok(())
 }
 pub async fn list(pool: &PgPool) -> Result<Vec<(i64, String)>, error::Error> {
-    let rows = sqlx::query("SELECT (id, descr) FROM Task")
+    let rows = sqlx::query("SELECT id, descr FROM Task")
         .fetch_all(pool)
         .await?;
     let mut data = vec![];
