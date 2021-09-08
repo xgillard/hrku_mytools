@@ -19,7 +19,7 @@ pub async fn init_db(pool: &PgPool) -> Result<(), error::Error> {
 }
 
 pub async fn add(pool: &PgPool, item: &str) -> Result<(), error::Error> {
-    sqlx::query("INSERT INTO Task(descr) VALUE (?)")
+    sqlx::query("INSERT INTO Task(descr) VALUES (?)")
         .bind(item)
         .execute(pool)
         .await?;
