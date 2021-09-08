@@ -25,14 +25,14 @@ pub async fn add(pool: &PgPool, item: &str) -> Result<(), error::Error> {
         .await?;
     Ok(())
 }
-pub async fn remove(pool: &PgPool, id: i64) -> Result<(), error::Error> {
+pub async fn remove(pool: &PgPool, id: i32) -> Result<(), error::Error> {
     sqlx::query("DELETE FROM Task WHERE id = $1")
         .bind(id)
         .execute(pool)
         .await?;
     Ok(())
 }
-pub async fn list(pool: &PgPool) -> Result<Vec<(i64, String)>, error::Error> {
+pub async fn list(pool: &PgPool) -> Result<Vec<(i32, String)>, error::Error> {
     let rows = sqlx::query("SELECT id, descr FROM Task")
         .fetch_all(pool)
         .await?;

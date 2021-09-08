@@ -19,7 +19,7 @@ pub async fn task_add(text: String) -> String {
 }
 
 #[rocket::get("/remove/<id>")]
-pub async fn task_remove(id: i64) -> String {
+pub async fn task_remove(id: i32) -> String {
     let res = _task_remove(id).await;
     match res {
         Ok(r) => r,
@@ -41,7 +41,7 @@ async fn _task_add(text: String) -> Result<String, Error> {
     let data = list(&pool).await?;
     Ok(lst2str(data))
 }
-async fn _task_remove(id: i64) -> Result<String, Error> {
+async fn _task_remove(id: i32) -> Result<String, Error> {
     let pool = db().await?;
     remove(&pool, id).await?;
     //
@@ -53,7 +53,7 @@ async fn _task_list() -> Result<String, Error> {
     let data = list(&pool).await?;
     Ok(lst2str(data))
 }
-fn lst2str(data: Vec<(i64, String)>) -> String {
+fn lst2str(data: Vec<(i32, String)>) -> String {
     let mut out = String::new();
     for d in data {
         out.push_str(&format!("* ({:>10}) {}", d.0, d.1));
