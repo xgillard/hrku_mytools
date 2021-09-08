@@ -56,7 +56,7 @@ async fn _task_list() -> Result<String, Error> {
 fn lst2str(data: Vec<(i32, String)>) -> String {
     let mut out = String::new();
     for d in data {
-        out.push_str(&format!("* ({:>10}) {}", d.0, d.1));
+        out.push_str(&format!("* ({:>10}) {}\n", d.0, d.1));
     }
 
     out
