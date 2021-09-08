@@ -10,29 +10,49 @@ use crate::{
 };
 
 #[rocket::get("/add/<text>")]
-pub async fn task_add(text: String) -> Result<String, Error> {
+pub async fn task_add(text: String) -> String {
+    let res = _task_add(text).await;
+    match res {
+        Ok(r) => r,
+        Err(e) => format!("{}", e),
+    }
+}
+
+#[rocket::get("/remove/<id>")]
+pub async fn task_remove(id: i64) -> String {
+    let res = _task_remove(id).await;
+    match res {
+        Ok(r) => r,
+        Err(e) => format!("{}", e),
+    }
+}
+#[rocket::get("/list")]
+pub async fn task_list() -> String {
+    let res = _task_list().await;
+    match res {
+        Ok(r) => r,
+        Err(e) => format!("{}", e),
+    }
+}
+async fn _task_add(text: String) -> Result<String, Error> {
     let pool = db().await?;
     add(&pool, &text).await?;
     //
     let data = list(&pool).await?;
     Ok(lst2str(data))
 }
-
-#[rocket::get("/remove/<id>")]
-pub async fn task_remove(id: i64) -> Result<String, Error> {
+async fn _task_remove(id: i64) -> Result<String, Error> {
     let pool = db().await?;
     remove(&pool, id).await?;
     //
     let data = list(&pool).await?;
     Ok(lst2str(data))
 }
-#[rocket::get("/list")]
-pub async fn task_list() -> Result<String, Error> {
+async fn _task_list() -> Result<String, Error> {
     let pool = db().await?;
     let data = list(&pool).await?;
     Ok(lst2str(data))
 }
-
 fn lst2str(data: Vec<(i64, String)>) -> String {
     let mut out = String::new();
     for d in data {
