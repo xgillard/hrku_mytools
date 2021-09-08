@@ -38,7 +38,7 @@ pub async fn list(pool: &PgPool) -> Result<Vec<(i64, String)>, error::Error> {
         .await?;
     let mut data = vec![];
     for row in rows {
-        data.push((row.get(1), row.get(2)));
+        data.push((row.get(0), row.get(1)));
     }
     Ok(data)
 }
