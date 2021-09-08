@@ -4,11 +4,14 @@ mod database;
 mod error;
 mod routes;
 
-#[tokio::main]
-async fn main() -> Result<(), error::Error> {
-    init_db(&db().await?).await?;
+#[rocket::main]
+async fn main() {
+    match init_db(&db().await?).await {
+        Ok(()) => println!("db initialized"),
+        Err(e) => println!("{}", e),
+    }
 
-    rocket::build()
+    let rkt = rocket::build()
         .mount("/pass", rocket::routes![routes::generate_password])
         .mount(
             "/todo",
@@ -16,6 +19,10 @@ async fn main() -> Result<(), error::Error> {
         )
         .launch()
         .await
-        .map_err(Box::new)?;
-    Ok(())
+        .map_err(Box::new);
+
+    match rkt {
+        Ok(()) => println!("rocket launched"),
+        Err(e) => println!("launch {}", e),
+    }
 }
