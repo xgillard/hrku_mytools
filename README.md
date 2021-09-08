@@ -9,7 +9,7 @@ heroku login
 heroku git:remote -a hrku-mytools
 ```
 
-Après ça, chaque fois qu'on fera un `git push heroku master`, ça va déployer 
+Après ça, chaque fois qu'on fera un `git push heroku main`, ça va déployer 
 l'application. Pour que heroku compile le code rust lorsqu'on fait un push, il 
 faut utiliser le buildpack rust pour heroku (https://github.com/emk/heroku-buildpack-rust). 
 On l'active avec la commande: `heroku buildpacks:set emk/rust`
