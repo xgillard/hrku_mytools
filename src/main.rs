@@ -6,13 +6,15 @@ mod routes;
 
 #[rocket::main]
 async fn main() {
-    let pool = db().await;
-    match pool {
-        Ok(pool) => match init_db(&pool).await {
-            Ok(()) => println!("db initialized"),
-            Err(e) => println!("{}", e),
-        },
-        Err(e) => println!("could not fetch the pool {}", e),
+    {
+        let pool = db().await;
+        match pool {
+            Ok(pool) => match init_db(&pool).await {
+                Ok(()) => println!("db initialized"),
+                Err(e) => println!("{}", e),
+            },
+            Err(e) => println!("could not fetch the pool {}", e),
+        }
     }
 
     let rkt = rocket::build()
