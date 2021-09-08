@@ -19,21 +19,21 @@ pub async fn init_db(pool: &PgPool) -> Result<(), error::Error> {
 }
 
 pub async fn add(pool: &PgPool, item: &str) -> Result<(), error::Error> {
-    sqlx::query("INSERT INTO Task(descr) VALUES (?);")
+    sqlx::query("INSERT INTO Task(descr) VALUES ($1)")
         .bind(item)
         .execute(pool)
         .await?;
     Ok(())
 }
 pub async fn remove(pool: &PgPool, id: i64) -> Result<(), error::Error> {
-    sqlx::query("DELETE FROM Task WHERE id = ?;")
+    sqlx::query("DELETE FROM Task WHERE id = $1")
         .bind(id)
         .execute(pool)
         .await?;
     Ok(())
 }
 pub async fn list(pool: &PgPool) -> Result<Vec<(i64, String)>, error::Error> {
-    let rows = sqlx::query("SELECT (id, descr) FROM Task;")
+    let rows = sqlx::query("SELECT (id, descr) FROM Task")
         .fetch_all(pool)
         .await?;
     let mut data = vec![];
