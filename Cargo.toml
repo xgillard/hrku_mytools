@@ -7,4 +7,6 @@ version = "0.1.0"
 passg-lib = "0.1.0"
 rocket = {version = "0.5.0-rc.1", git = "https://github.com/SergioBenitez/Rocket"}
 serde = "1.0.130"
+sqlx = {version = "0.5.7", features = ["runtime-tokio-native-tls", "postgres"]}
 thiserror = "1.0.29"
+tokio = "1.11.0"

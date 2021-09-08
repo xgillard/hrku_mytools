@@ -55,3 +55,16 @@ essaie de faire un truc. In fine, notre `Procfile` minimal ressemble à ça:
 ```
 web: ROCKET_ADDRESS="0.0.0.0" ROCKET_PORT=$PORT ROCKET_KEEP_ALIVE=0 ./target/release/hrku_mytools
 ```
+
+## Database
+Si on veut, on peut utiliser une database (par ex postgres ou redis) et faire 
+des trucs funky avec. La documentation montre les différents tarifs etc.. 
+(https://elements.heroku.com/addons/heroku-postgresql). Il y a un plan qui est
+completement gratuit. Il ne permet pas d'utiliser bcp de resources mais pour
+bidouiller, c'est ok. Le plus simple pour ajouter une db postgrest à un 
+truc existant c'est de le faire en ligne de commande avec. Ce qui va créer la
+db et l'exposer via `$DATABASE_URL` (qu'on devra référencer dans le procfile).
+
+```bash
+heroku addons:create heroku-postgresql:hobby-dev 
+```
