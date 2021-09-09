@@ -7,9 +7,9 @@ mod routes;
 #[rocket::main]
 async fn main() {
     {
-        let pool = db().await;
-        match pool {
-            Ok(pool) => match init_db(&pool).await {
+        let mut cnx = db().await;
+        match cnx {
+            Ok(ref mut cnx) => match init_db(cnx).await {
                 Ok(()) => println!("db initialized"),
                 Err(e) => println!("{}", e),
             },

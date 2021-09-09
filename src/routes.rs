@@ -35,22 +35,22 @@ pub async fn task_list() -> String {
     }
 }
 async fn _task_add(text: String) -> Result<String, Error> {
-    let pool = db().await?;
-    add(&pool, &text).await?;
+    let mut cnx = db().await?;
+    add(&mut cnx, &text).await?;
     //
-    let data = list(&pool).await?;
+    let data = list(&mut cnx).await?;
     Ok(lst2str(data))
 }
 async fn _task_remove(id: i32) -> Result<String, Error> {
-    let pool = db().await?;
-    remove(&pool, id).await?;
+    let mut cnx = db().await?;
+    remove(&mut cnx, id).await?;
     //
-    let data = list(&pool).await?;
+    let data = list(&mut cnx).await?;
     Ok(lst2str(data))
 }
 async fn _task_list() -> Result<String, Error> {
-    let pool = db().await?;
-    let data = list(&pool).await?;
+    let mut cnx = db().await?;
+    let data = list(&mut cnx).await?;
     Ok(lst2str(data))
 }
 fn lst2str(data: Vec<(i32, String)>) -> String {

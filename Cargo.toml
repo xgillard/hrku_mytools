@@ -4,6 +4,8 @@ name = "hrku_mytools"
 version = "0.1.0"
 
 [dependencies]
+async_once = "0.2.1"
+lazy_static = "1.4.0"
 passg-lib = "0.1.0"
 rocket = {version = "0.5.0-rc.1", git = "https://github.com/SergioBenitez/Rocket"}
 serde = "1.0.130"
